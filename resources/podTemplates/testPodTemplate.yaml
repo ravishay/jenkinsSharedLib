@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jnlp
+    image: docker.io/jenkins/inbound-agent:alpine3.20-jdk21
+    workingDir: /tmp/jenkins
+    volumeMounts:
+    - mountPath: "/results/"
+      name: "results"
+      readOnly: false
+    resources:
+      requests:
+        cpu: 1
+        memory: 2Gi
+        ephemeral-storage: "4Gi"
+      limits:
+        # No cpu limit
+        memory: 10Gi
+        ephemeral-storage: "10Gi"
+    env:
+      - name: MY_NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+
+  - name: git
+    image: docker.io/alpine/git
+    command: ["cat"]
+    tty: true
+
+  - name: helm
+    image: docker.io/alpine/helm
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - mountPath: "/results/"
+      name: "results"
+      readOnly: false
+
+  volumes:
+  - name: "results"
+    persistentVolumeClaim:
+      claimName: "allure-results"
+      readOnly: false
