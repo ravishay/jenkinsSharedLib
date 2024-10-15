@@ -28,18 +28,3 @@ spec:
     image: docker.io/alpine/git
     command: ["cat"]
     tty: true
-
-  - name: helm
-    image: docker.io/alpine/helm
-    command: ["cat"]
-    tty: true
-    volumeMounts:
-    - mountPath: "/results/"
-      name: "results"
-      readOnly: false
-
-  volumes:
-  - name: "results"
-    persistentVolumeClaim:
-      claimName: "allure-results"
-      readOnly: false
