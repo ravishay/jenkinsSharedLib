@@ -28,3 +28,9 @@ spec:
     image: docker.io/alpine/git
     command: ["cat"]
     tty: true
+
+  volumes:
+  - name: "results"
+    persistentVolumeClaim:
+      claimName: "allure-results"
+      readOnly: false
