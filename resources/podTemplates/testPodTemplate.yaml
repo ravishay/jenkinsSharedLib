@@ -5,10 +5,10 @@ spec:
   - name: jnlp
     image: docker.io/jenkins/inbound-agent:alpine3.20-jdk21
     workingDir: /tmp/jenkins
-    volumeMounts:
-    - mountPath: "/results/"
-      name: "results"
-      readOnly: false
+    # volumeMounts:
+    # - mountPath: "/results/"
+    #   name: "results"
+    #   readOnly: false
     resources:
       requests:
         cpu: 1
@@ -29,8 +29,8 @@ spec:
     command: ["cat"]
     tty: true
 
-  volumes:
-  - name: "results"
-    persistentVolumeClaim:
-      claimName: "allure-results"
-      readOnly: false
+  # volumes:
+  # - name: "results"
+  #   persistentVolumeClaim:
+  #     claimName: "allure-results"
+  #     readOnly: false
