@@ -9,25 +9,25 @@ spec:
     # - mountPath: "/results/"
     #   name: "results"
     #   readOnly: false
-    resources:
-      requests:
-        cpu: 1
-        memory: 2Gi
-        ephemeral-storage: "4Gi"
-      limits:
-        # No cpu limit
-        memory: 10Gi
-        ephemeral-storage: "10Gi"
-    env:
-      - name: MY_NODE_NAME
-        valueFrom:
-          fieldRef:
-            fieldPath: spec.nodeName
+    # resources:
+    #   requests:
+    #     cpu: 1
+    #     memory: 2Gi
+    #     ephemeral-storage: "4Gi"
+    #   limits:
+    #     # No cpu limit
+    #     memory: 10Gi
+    #     ephemeral-storage: "10Gi"
+    # env:
+    #   - name: MY_NODE_NAME
+    #     valueFrom:
+    #       fieldRef:
+    #         fieldPath: spec.nodeName
 
-  - name: git
-    image: docker.io/alpine/git
-    command: ["cat"]
-    tty: true
+  # - name: git
+  #   image: docker.io/alpine/git
+  #   command: ["cat"]
+  #   tty: true
 
   # volumes:
   # - name: "results"
