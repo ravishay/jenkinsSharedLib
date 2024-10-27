@@ -5,10 +5,10 @@ spec:
   - name: jnlp
     image: docker.io/jenkins/inbound-agent:alpine3.20-jdk21
     workingDir: /tmp/jenkins
-    # volumeMounts:
-    # - mountPath: "/results/"
-    #   name: "results"
-    #   readOnly: false
+    volumeMounts:
+    - mountPath: "/results/"
+      name: "results"
+      readOnly: false
     # resources:
     #   requests:
     #     cpu: 1
@@ -18,19 +18,19 @@ spec:
     #     # No cpu limit
     #     memory: 10Gi
     #     ephemeral-storage: "10Gi"
-    # env:
-    #   - name: MY_NODE_NAME
-    #     valueFrom:
-    #       fieldRef:
-    #         fieldPath: spec.nodeName
+    env:
+      - name: MY_NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
 
   - name: git
     image: docker.io/alpine/git
     command: ["cat"]
     tty: true
 
-  # volumes:
-  # - name: "results"
-  #   persistentVolumeClaim:
-  #     claimName: "allure-results"
-  #     readOnly: false
+  volumes:
+  - name: "results"
+    persistentVolumeClaim:
+      claimName: "allure-results"
+      readOnly: false
