@@ -24,10 +24,10 @@ spec:
     #       fieldRef:
     #         fieldPath: spec.nodeName
 
-  # - name: git
-  #   image: docker.io/alpine/git
-  #   command: ["cat"]
-  #   tty: true
+  - name: git
+    image: docker.io/alpine/git
+    command: ["cat"]
+    tty: true
 
   # volumes:
   # - name: "results"
